@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#16181d">
+    <meta name="description" content="TaskFlow, una aplicación sencilla para organizar las tareas de cada día.">
+    <title>TaskFlow · Organiza tu día</title>
+    <link rel="stylesheet" href="./styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">Tu espacio de enfoque</p>
+        <h1 id="page-title">Haz espacio para<br><span>lo importante.</span></h1>
+        <p class="intro-copy">Un lugar sereno para capturar lo que tienes en mente y avanzar, una tarea a la vez.</p>
+
+        <div class="progress-card" aria-live="polite">
+          <div>
+            <span class="progress-label">Progreso de hoy</span>
+            <strong id="progress-value">0%</strong>
+          </div>
+          <div class="progress-track" aria-hidden="true"><span id="progress-bar"></span></div>
+          <p id="progress-copy">Agrega tu primera tarea para comenzar.</p>
+        </div>
+      </section>
+
+      <section class="task-panel" aria-labelledby="tasks-heading">
+        <header class="panel-header">
+          <div>
+            <p class="date" id="current-date"></p>
+            <h2 id="tasks-heading">Mis tareas</h2>
+          </div>
+          <span class="task-count" id="task-count">0 pendientes</span>
+        </header>
+
+        <form class="task-form" id="task-form" novalidate>
+          <label class="sr-only" for="task-input">Nueva tarea</label>
+          <input id="task-input" name="task" type="text" maxlength="120" placeholder="¿Qué necesitas hacer?" autocomplete="off" required>
+          <button type="submit" aria-label="Agregar tarea"><span aria-hidden="true">+</span>Agregar</button>
+        </form>
+        <p class="form-error" id="form-error" role="alert"></p>
+
+        <div class="toolbar">
+          <div class="filters" aria-label="Filtrar tareas">
+            <button class="filter is-active" type="button" data-filter="all" aria-pressed="true">Todas</button>
+            <button class="filter" type="button" data-filter="active" aria-pressed="false">Pendientes</button>
+            <button class="filter" type="button" data-filter="completed" aria-pressed="false">Completadas</button>
+          </div>
+        </div>
+
+        <ul class="task-list" id="task-list" aria-live="polite"></ul>
+        <div class="empty-state" id="empty-state" hidden>
+          <div class="empty-icon" aria-hidden="true">✓</div>
+          <h3 id="empty-title">Todo despejado</h3>
+          <p id="empty-copy">Agrega una tarea y empieza a construir impulso.</p>
+        </div>
+      </section>
+    </main>
+
+    <template id="task-template">
+      <li class="task-item">
+        <label class="check-control">
+          <input class="task-toggle" type="checkbox">
+          <span class="custom-check" aria-hidden="true"></span>
+          <span class="task-title"></span>
+        </label>
+        <button class="delete-task" type="button" aria-label="Eliminar tarea">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M9 7V4h6v3m-8 0 1 13h8l1-13M10 11v5m4-5v5"/></svg>
+        </button>
+      </li>
+    </template>
+
+    <script src="./src/tasks.js"></script>
+    <script src="./src/app.js"></script>
+  </body>
+</html>
